@@ -1,9 +1,8 @@
-export const emailConfig = {
-    serviceId: 'service_romaxro',
-    templateId: 'template_fy4izqq',
-    templates: {
-        contact: 'template_fy4izqq',
-        demo: 'template_9tis7ir',    // Using the same template for demo
-        exchange: 'template_fy4izqq'  // Using the same template for exchange
-    }
-};
+export let emailConfig = {};
+
+fetch('/.netlify/functions/get_email_config')
+    .then(response => response.json())
+    .then(data => {
+        emailConfig = data;
+    })
+    .catch(error => console.error("Error loading email config", error));
